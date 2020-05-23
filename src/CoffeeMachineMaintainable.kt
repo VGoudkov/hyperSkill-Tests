@@ -1,33 +1,72 @@
 package ru.vgoudk.kotlinclass
 
+import java.util.*
 
-import java.util.Scanner
 
 fun main() {
+
+    var water = 400
+    var milk = 540
+    var beans = 120
+    var cups = 9
+    var money = 550
+
+    printState(water, milk, beans, cups, money)
+
     val scanner = Scanner(System.`in`)
 
-    print("Write how many ml of water the coffee machine has: ")
-    val water_ml = scanner.nextInt()
-    val cupsByWater = water_ml / 200;
 
-    print("Write how many ml of milk the coffee machine has: ")
-    val milk_ml = scanner.nextInt()
-    val cupsByMilk = milk_ml / 50;
+    print("Write action (buy, fill, take): ")
+    val action = scanner.nextLine()
+    when (action) {
+        "buy" -> {
+            print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: ")
+            when (scanner.nextInt()) {
+                1 -> {
+                    water -= 250
+                    beans -= 16
+                    money += 4
+                }
+                2 -> {
+                    water -= 350
+                    milk -= 75
+                    beans -= 20
+                    money += 7
+                }
+                3 -> {
+                    water -= 200
+                    milk -= 100
+                    beans -= 12
+                    money += 6
+                }
+            }
+            --cups
 
-    print("Write how many grams of coffee beans the coffee machine has: ")
-    val coffee_gr = scanner.nextInt()
-    val cupsByCoffee = coffee_gr / 15;
+        }
+        "fill" -> {
+            print("Write how many ml of water do you want to add: ")
+            water += scanner.nextInt()
+            print("Write how many ml of milk do you want to add: ")
+            milk += scanner.nextInt()
+            print("Write how many grams of coffee beans do you want to add: ")
+            beans += scanner.nextInt()
+            print("Write how many disposable cups of coffee do you want to add: ")
+            cups += scanner.nextInt()
+        }
+        "take" -> {
+            println("I gave you \$$money")
+            money = 0;
+        }
+    }
 
-    print("Write how many cups of coffee you will need: ")
-    val cups = scanner.nextInt()
+    printState(water, milk, beans, cups, money)
+}
 
-    val availableCups =
-        if (cupsByWater <= cupsByMilk && cupsByWater <= cupsByCoffee) cupsByWater
-        else if (cupsByCoffee <= cupsByMilk) cupsByCoffee
-        else cupsByMilk
-
-    if (availableCups < cups) println("No, I can make only $availableCups cups of coffee")
-    else if (availableCups == cups) println("Yes, I can make that amount of coffee")
-    else println("Yes, I can make that amount of coffee (and even ${availableCups - cups} more than that)")
-
+fun printState(water: Int, milk: Int, beans: Int, cups: Int, money: Int) {
+    println("The coffee machine has:")
+    println("$water of water")
+    println("$milk of milk")
+    println("$beans of coffee beans")
+    println("$cups of disposable cups")
+    println("$money of money")
 }
