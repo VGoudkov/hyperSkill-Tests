@@ -5,11 +5,13 @@ import java.util.*
 
 fun main() {
 
+    //region Initial machine state
     var water = 400
     var milk = 540
     var beans = 120
     var cups = 9
     var money = 550
+    //endregion
 
     printState(water, milk, beans, cups, money)
 
@@ -44,6 +46,7 @@ fun main() {
 
         }
         "fill" -> {
+            //region maintanance section
             print("Write how many ml of water do you want to add: ")
             water += scanner.nextInt()
             print("Write how many ml of milk do you want to add: ")
@@ -52,6 +55,7 @@ fun main() {
             beans += scanner.nextInt()
             print("Write how many disposable cups of coffee do you want to add: ")
             cups += scanner.nextInt()
+            //endregion
         }
         "take" -> {
             println("I gave you \$$money")
