@@ -1,4 +1,4 @@
-package ru.vgoudk.kotlinclass
+package machine
 
 import java.util.*
 
